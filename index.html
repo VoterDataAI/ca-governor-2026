@@ -10,15 +10,15 @@
 :root{--red:#e03030;--blue:#2563eb;--purple:#7c3aed;--gold:#d4a017;--green:#16a34a;--bg:#080c14;--surface:#0e1520;--surface2:#141e2e;--border:rgba(255,255,255,0.07);--text:#e8edf5;--text-dim:#6b7a94;--text-mid:#9aaabf;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;--display:'Bebas Neue',sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;line-height:1.5;min-height:100vh;}
-.header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:stretch;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
-.header-left{display:flex;align-items:center;gap:20px;padding:16px 0;}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:80px;}
+.header-left{display:flex;align-items:center;gap:16px;flex-shrink:0;}
 .state-flag{width:36px;height:36px;background:var(--red);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:18px;color:#fff;flex-shrink:0;}
-.header-title{font-family:var(--display);font-size:22px;letter-spacing:2px;color:var(--text);line-height:1;}
-.header-sub{font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:1px;margin-top:3px;}
+.header-title{font-family:var(--display);font-size:26px;letter-spacing:2px;color:var(--text);line-height:1;}
+.header-sub{font-family:var(--mono);font-size:10px;color:var(--text-dim);letter-spacing:0.5px;margin-top:4px;}
 .header-right{display:flex;align-items:center;gap:0;}
-.header-stat{text-align:center;padding:16px 0 16px 24px;border-left:1px solid var(--border);}
-.header-stat-val{font-family:var(--display);font-size:18px;color:var(--gold);letter-spacing:1px;}
-.header-stat-label{font-family:var(--mono);font-size:9px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.header-stat{text-align:center;padding:0 0 0 24px;border-left:1px solid var(--border);}
+.header-stat-val{font-family:var(--display);font-size:24px;color:var(--gold);letter-spacing:1px;}
+.header-stat-label{font-family:var(--mono);font-size:9px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
 .canvass-badge{display:flex;align-items:center;gap:6px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);border-radius:4px;padding:5px 10px;font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:1px;margin-left:20px;}
 .pulse{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
@@ -111,11 +111,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
     </div>
   </div>
   <div class="header-right">
-    <div class="header-stat"><div class="header-stat-val">5,644,406</div><div class="header-stat-label">Governor race votes · C5</div></div>
-    <div class="header-stat"><div class="header-stat-val">+649,430</div><div class="header-stat-label">Added since election night</div></div>
-    <div class="header-stat"><div class="header-stat-val" id="hdr-lead">+63,335</div><div class="header-stat-label" id="hdr-lead-label">Hilton lead · current</div></div>
-    <div class="header-stat"><div class="header-stat-val">Jul 10</div><div class="header-stat-label">Certification deadline</div></div>
-    <div class="canvass-badge"><div class="pulse"></div>CANVASS IN PROGRESS · JULY 10</div>
+    <div class="header-stat"><div class="header-stat-val">5,779,635</div><div class="header-stat-label">Total ballots cast · all races</div></div>
+    <div class="header-stat"><div class="header-stat-val">5,644,406</div><div class="header-stat-label">Governor race votes · ~135k undervotes</div></div>
+    <div class="header-stat"><div class="header-stat-val">25.0%</div><div class="header-stat-label">Statewide turnout</div></div>
+    <div class="canvass-badge"><div class="pulse"></div>UNOFFICIAL · CANVASS OPEN</div>
   </div>
 </header>
 
@@ -142,7 +141,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
       <div class="cname">Xavier Becerra</div>
       <div class="cparty">Democrat · 2nd place</div>
       <div class="cvotes">1,470,100</div>
-      <div class="cpct">26.0% · closing fast</div>
+      <div class="cpct">26.0% · closing gap</div>
       <div class="cdelta" style="color:var(--blue);">+202,725 since election night · +0.6pts ↑</div>
       <div class="cbar"><div class="cbar-fill" style="width:95.9%"></div></div>
       <div class="cbadge">✓ Advances to November</div>
@@ -172,8 +171,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
   <div class="full">
     <div class="battle">
       <div class="sl" style="margin-bottom:14px;">Party aggregate vote — C5 latest</div>
-      <div class="battle-labels"><span class="battle-r">Republican 39.8%</span><span class="battle-d">Democrat 58.9%</span></div>
-      <div class="battle-bar"><div class="bfill-r" style="width:39.8%"></div><div class="bfill-gap"></div><div class="bfill-d" style="width:58.9%"></div></div>
+      <div class="battle-labels"><span class="battle-r">Republican 39.7%</span><span class="battle-d">Democrat 58.9%</span></div>
+      <div class="battle-bar"><div class="bfill-r" style="width:39.7%"></div><div class="bfill-gap"></div><div class="bfill-d" style="width:58.9%"></div></div>
       <div class="battle-vals"><span>2,243,227 votes · 12 R candidates</span><span>3,321,793 votes · 24 D candidates</span></div>
       <div class="battle-note">D-R gap grew from +866k election night to +1,078,566 at C5 — +212k added during canvass. D-heavy late VBM from LA, Alameda, Riverside, and Santa Clara driving the shift.</div>
     </div>
@@ -204,10 +203,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
         </div>
       </div>
       <div class="card">
-        <div class="sl" style="margin-bottom:12px;">Hilton raw lead over Becerra — all 12 snapshots</div>
-        <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-bottom:10px;">Lead grew during election night, peaked at C1 (+120,084), and has declined sharply through canvass. C4 was the biggest single-batch drop (−36,834).</div>
+        <div class="sl" style="margin-bottom:12px;">Vote share % — Hilton, Becerra &amp; Steyer</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-bottom:8px;">Hilton declining, Becerra rising — the gap closing through the canvass. Steyer gaining slightly as late D VBM arrives.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;font-size:11px;color:var(--text-dim);">
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:18px;height:2px;background:var(--red);display:inline-block;border-radius:2px;"></span>Hilton (R)</span>
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:18px;height:2px;background:var(--blue);display:inline-block;border-radius:2px;"></span>Becerra (D)</span>
+          <span style="display:flex;align-items:center;gap:4px;"><span style="width:18px;height:0;border-top:2px dashed #7c3aed;display:inline-block;"></span>Steyer (D)</span>
+        </div>
         <div style="position:relative;width:100%;height:220px;">
-          <canvas id="gapChart" role="img" aria-label="Hilton lead: grew election night to peak 120,084 then declined to 63,335 at C5">Lead peaked C1, now C5 +63,335.</canvas>
+          <canvas id="shareGapChart" role="img" aria-label="Vote share %: Hilton declining 27.8 to 27.2, Becerra rising 25.4 to 26.0, Steyer rising 19.6 to 20.2">Hilton 27.8→27.2%. Becerra 25.4→26.0%. Steyer 19.6→20.2%.</canvas>
         </div>
       </div>
     </div>
@@ -302,46 +306,46 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
     <div class="grid-2">
       <div class="card">
         <div class="sl" style="margin-bottom:12px;">Top 10 counties by ballots cast — current canvass</div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Los Angeles</span><div class="bar-track"><div class="bar-fill-inner" style="width:100%;background:var(--blue);"></div></div><span class="bar-val">1,477,473 · 25.0%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Orange</span><div class="bar-track"><div class="bar-fill-inner" style="width:39.6%;background:var(--purple);"></div></div><span class="bar-val">584,946 · 28.9%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">San Diego</span><div class="bar-track"><div class="bar-fill-inner" style="width:39.1%;background:var(--red);"></div></div><span class="bar-val">577,588 · 30.3%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Riverside</span><div class="bar-track"><div class="bar-fill-inner" style="width:20.3%;background:var(--blue);"></div></div><span class="bar-val">321,302 · 22.4%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">San Bernardino</span><div class="bar-track"><div class="bar-fill-inner" style="width:17%;background:var(--red);"></div></div><span class="bar-val">279,754 · 22.7%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Santa Clara</span><div class="bar-track"><div class="bar-fill-inner" style="width:15.8%;background:var(--blue);"></div></div><span class="bar-val">257,317 · 23.9%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Sacramento</span><div class="bar-track"><div class="bar-fill-inner" style="width:13.9%;background:var(--blue);"></div></div><span class="bar-val">183,951 · 20.0%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Contra Costa</span><div class="bar-track"><div class="bar-fill-inner" style="width:13.2%;background:var(--blue);"></div></div><span class="bar-val">174,683 · 23.9%</span></div>
-        <div class="bar-row"><span class="bar-name" style="width:130px;">Ventura</span><div class="bar-track"><div class="bar-fill-inner" style="width:10.4%;background:var(--blue);"></div></div><span class="bar-val">154,150 · 29.3%</span></div>
+
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Los Angeles</span><div class="bar-track"><div class="bar-fill-inner" style="width:100.0%;background:var(--blue);"></div></div><span class="bar-val">1,477,473 · 25.0%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">San Diego</span><div class="bar-track"><div class="bar-fill-inner" style="width:39.6%;background:var(--purple);"></div></div><span class="bar-val">584,946 · 28.9%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Orange</span><div class="bar-track"><div class="bar-fill-inner" style="width:39.1%;background:var(--purple);"></div></div><span class="bar-val">577,588 · 30.3%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Riverside</span><div class="bar-track"><div class="bar-fill-inner" style="width:21.7%;background:var(--blue);"></div></div><span class="bar-val">321,302 · 22.4%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">San Bernardino</span><div class="bar-track"><div class="bar-fill-inner" style="width:18.9%;background:var(--purple);"></div></div><span class="bar-val">279,754 · 22.7%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Santa Clara</span><div class="bar-track"><div class="bar-fill-inner" style="width:17.4%;background:var(--blue);"></div></div><span class="bar-val">257,317 · 23.9%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Sacramento</span><div class="bar-track"><div class="bar-fill-inner" style="width:12.5%;background:var(--blue);"></div></div><span class="bar-val">183,951 · 20.0%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Contra Costa</span><div class="bar-track"><div class="bar-fill-inner" style="width:11.8%;background:var(--blue);"></div></div><span class="bar-val">174,683 · 23.9%</span></div>
+        <div class="bar-row"><span class="bar-name" style="width:130px;">Ventura</span><div class="bar-track"><div class="bar-fill-inner" style="width:10.4%;background:var(--purple);"></div></div><span class="bar-val">154,150 · 29.3%</span></div>
         <div class="bar-row"><span class="bar-name" style="width:130px;">Kern</span><div class="bar-track"><div class="bar-fill-inner" style="width:5.4%;background:var(--red);"></div></div><span class="bar-val">79,864 · 17.2%</span></div>
         <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-top:10px;">Source: CA SOS county reporting status · June 4, 2026 · 7:44 p.m. · Statewide: 5,779,635 ballots cast · 25.0% turnout.</div>
       </div>
       <div class="card">
         <div class="sl" style="margin-bottom:12px;">Estimated outstanding ballots — BAR report Jun 4 6:00 p.m.</div>
-        <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-bottom:10px;">Source: CA BAR Estimated Unprocessed Ballots report. Statewide: <strong style="color:var(--text);">3,606,128 ballots still outstanding</strong> as of Jun 4 6:00 p.m. — more votes remaining than have been processed so far.</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-bottom:10px;">Source: CA BAR Estimated Unprocessed Ballots report as of Jun 4 6:00 p.m.. Statewide: 3,606,128 ballots still outstanding · 48,217 left to cure. Statewide: <strong style="color:var(--text);">3,606,128 ballots still outstanding</strong> as of Jun 4 6:00 p.m. — more votes remaining than have been processed so far.</div>
         <table class="snap-table" style="font-size:11px;">
           <thead>
             <tr><th style="width:18%">County</th><th style="width:14%">Processed</th><th style="width:14%">Outstanding</th><th style="width:10%">Next report</th><th style="width:14%">Lean</th></tr>
           </thead>
           <tbody>
-            <tr class="cur"><td><strong>Los Angeles</strong></td><td>1,395,987</td><td style="color:var(--gold);">713,180</td><td>Jun 5 5:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
-            <tr><td>San Diego</td><td>584,946</td><td style="color:var(--gold);">275,000</td><td>Jun 5 6:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
-            <tr><td>Orange</td><td>544,338</td><td style="color:var(--gold);">270,950</td><td>Jun 5 5:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
-            <tr><td>Riverside</td><td>321,302</td><td style="color:var(--gold);">270,000</td><td>Jun 5 6:00p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
-            <tr><td>Sacramento</td><td>183,951</td><td style="color:var(--gold);">221,830</td><td>Jun 5 4:15p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
-            <tr><td>San Francisco</td><td>140,315</td><td style="color:var(--gold);">128,300</td><td>Jun 5 4:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
-            <tr><td>Santa Clara</td><td>257,317</td><td style="color:var(--gold);">116,500</td><td>Jun 5 5:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
-            <tr><td>San Bernardino</td><td>279,754</td><td style="color:var(--gold);">116,415</td><td>Jun 5 4:00p</td><td><span class="cv-lean lean-mix">Mixed/R</span></td></tr>
-            <tr><td>Contra Costa</td><td>174,683</td><td style="color:var(--gold);">144,400</td><td>Jun 5 4:00p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
-            <tr><td>San Mateo</td><td>91,075</td><td style="color:var(--gold);">103,210</td><td>Jun 5 4:30p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
-            <tr><td>Marin</td><td>44,159</td><td style="color:var(--gold);">91,217</td><td>Jun 8 3:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
-            <tr><td>Ventura</td><td>154,150</td><td style="color:var(--gold);">86,685</td><td>Jun 9 3:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
-            <tr><td>Kern</td><td>76,480</td><td style="color:var(--gold);">75,840</td><td>Jun 8 5:00p</td><td><span style="font-size:10px;padding:2px 8px;border-radius:3px;background:rgba(224,48,48,0.15);color:var(--red);">R-leaning</span></td></tr>
-            <tr><td>San Joaquin</td><td>74,248</td><td style="color:var(--gold);">66,392</td><td>Jun 5 7:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
-            <tr><td>Solano</td><td>71,362</td><td style="color:var(--gold);">45,250</td><td>Jun 4 5:30p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
+            <tr><td><strong>Los Angeles</strong></td><td>1,395,987</td><td style="color:var(--gold);">713,180</td><td>Jun 5 5:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
+            <tr><td><strong>San Diego</strong></td><td>584,946</td><td style="color:var(--gold);">275,000</td><td>Jun 5 6:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
+            <tr><td><strong>Orange</strong></td><td>544,338</td><td style="color:var(--gold);">270,950</td><td>Jun 5 5:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
+            <tr><td><strong>Riverside</strong></td><td>321,302</td><td style="color:var(--gold);">270,000</td><td>Jun 5 6:00p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
+            <tr><td><strong>Sacramento</strong></td><td>183,951</td><td style="color:var(--gold);">221,830</td><td>Jun 5 4:15p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
+            <tr><td><strong>San Francisco</strong></td><td>140,315</td><td style="color:var(--gold);">128,300</td><td>Jun 5 4:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
+            <tr><td><strong>Contra Costa</strong></td><td>174,683</td><td style="color:var(--gold);">144,400</td><td>Jun 5 4:00p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
+            <tr><td><strong>Santa Clara</strong></td><td>257,317</td><td style="color:var(--gold);">116,500</td><td>Jun 5 5:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
+            <tr><td><strong>San Bernardino</strong></td><td>279,754</td><td style="color:var(--gold);">116,415</td><td>Jun 5 4:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
+            <tr><td><strong>San Mateo</strong></td><td>91,075</td><td style="color:var(--gold);">103,210</td><td>Jun 5 4:30p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
+            <tr><td><strong>Marin</strong></td><td>44,159</td><td style="color:var(--gold);">91,217</td><td>Jun 8 3:00p</td><td><span class="cv-lean lean-d">Strong D</span></td></tr>
+            <tr><td><strong>Ventura</strong></td><td>154,150</td><td style="color:var(--gold);">86,685</td><td>Jun 9 3:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
+            <tr><td><strong>Kern</strong></td><td>79,864</td><td style="color:var(--gold);">75,840</td><td>Jun 8 5:00p</td><td><span style="font-size:10px;padding:2px 8px;border-radius:3px;background:rgba(224,48,48,0.15);color:var(--red);">R-leaning</span></td></tr>
+            <tr><td><strong>San Joaquin</strong></td><td>74,248</td><td style="color:var(--gold);">66,392</td><td>Jun 5 7:00p</td><td><span class="cv-lean lean-mix">Mixed</span></td></tr>
+            <tr><td><strong>Solano</strong></td><td>89,979</td><td style="color:var(--gold);">45,250</td><td>Jun 4 5:30p</td><td><span class="cv-lean lean-d">D-leaning</span></td></tr>
           </tbody>
         </table>
         <div style="margin-top:12px;padding:10px 14px;background:var(--surface2);border-radius:4px;border-left:2px solid var(--blue);font-family:var(--mono);font-size:11px;color:var(--text-mid);line-height:1.6;">
-          <strong style="color:var(--text);">Statewide: 3,606,128 ballots outstanding · 48,217 left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has 713k remaining, Sacramento 222k, SF 128k, Santa Clara 117k, Contra Costa 144k. Ventura County has 86,685 remaining, next report Jun 9.
-        </div>
+          <strong style="color:var(--text);">Statewide: 3,606,128 ballots outstanding · 48,217 left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has 713,180 remaining. Ventura County has 86,685 remaining, next report Jun 9 3:00p.</div>
       </div>
     </div>
   </div>
@@ -372,7 +376,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
 <footer class="footer">
   <div style="max-width:1400px;margin:0 auto;">
     Sources: CA Secretary of State (api.sos.ca.gov/returns/governor) · IVP voter registration (independentvoterproject.org/voter-stats/ca, June 3 2026) · politicaldata.com VBM tracker (post-election) · PPIC May 2026 statewide survey<br>
-    All results unofficial pending canvass certification July 10, 2026. NPP estimates are modeled approximations — CA SOS does not publish vote totals by voter registration type. Dashboard last updated June 4, 2026.
+    All results unofficial pending canvass certification July 10, 2026. NPP estimates are modeled approximations — CA SOS does not publish vote totals by voter registration type. Dashboard last updated June 05, 2026 at 10:33 AM.
   </div>
 </footer>
 
@@ -400,7 +404,6 @@ const ALL_LABS=['S1·10:50p','S2·11:46p','S3·12:10a','S4·12:24a','S5·1:06a',
 const hiltonAll= [26.9,27.5,27.6,27.6,27.7,27.7,27.8,27.8,27.6,27.5,27.2,27.2];
 const becerraAll=[25.7,25.5,25.5,25.5,25.5,25.4,25.4,25.4,25.5,25.6,26.0,26.0];
 const steyerAll= [19.8,19.6,19.6,19.6,19.6,19.6,19.6,19.6,19.7,19.8,20.2,20.2];
-const gapAll=    [49340,93068,96941,98951,106399,110016,119896,120084,106979,100760,63926,63335];
 
 // Canvass only
 const CV_LABS=['C1·Jun3 2p','C2·Jun3 6p','C3·Jun4 10a','C4·Jun4 6p','C5·Jun4 8p'];
@@ -421,11 +424,19 @@ new Chart(document.getElementById('batchShareChart'),{type:'line',
     scales:{x:{ticks:{autoSkip:true,maxRotation:45,font:{size:8}},grid:{color:GRID}},y:{min:0,max:80,ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:GRID}}}}
 });
 
-// Gap full chart
-new Chart(document.getElementById('gapChart'),{type:'line',
-  data:{labels:ALL_LABS,datasets:[{label:'H-B lead',data:gapAll,borderColor:RED,backgroundColor:'rgba(224,48,48,0.08)',pointBackgroundColor:RED,pointRadius:4,tension:0.3,fill:true,borderWidth:2}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-    scales:{x:{ticks:{autoSkip:true,maxRotation:45,font:{size:8}},grid:{color:GRID}},y:{ticks:{callback:v=>'+'+v.toLocaleString(),font:{size:10}},grid:{color:GRID}}}}
+// Vote share % — three candidates across all 12 snapshots
+new Chart(document.getElementById('shareGapChart'),{type:'line',
+  data:{labels:ALL_LABS,datasets:[
+    {label:'Hilton (R)',data:hiltonAll,borderColor:RED,pointBackgroundColor:RED,pointRadius:4,tension:0.3,borderWidth:2},
+    {label:'Becerra (D)',data:becerraAll,borderColor:BLUE,pointBackgroundColor:BLUE,pointRadius:4,tension:0.3,borderWidth:2},
+    {label:'Steyer (D)',data:steyerAll,borderColor:PURPLE,pointBackgroundColor:PURPLE,pointRadius:4,tension:0.3,borderDash:[4,3],borderWidth:2}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{ticks:{autoSkip:true,maxRotation:45,font:{size:8}},grid:{color:GRID}},
+      y:{min:18,max:30,ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:GRID}}
+    }}
 });
 
 // NPP chart
