@@ -131,10 +131,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
   .snap-table td{padding:6px 5px 6px 0;}
   .grid-2{grid-template-columns:1fr;gap:10px;}
   .card canvas{max-width:100% !important;}
-  .bar-row{flex-wrap:wrap;gap:4px;}
-  .bar-name{width:100% !important;text-align:left;font-size:10px;}
-  .bar-track{width:100%;flex:none;}
-  .bar-val{width:auto;font-size:10px;}
+  .bar-row{flex-wrap:nowrap;gap:6px;align-items:center;}
+  .bar-name{width:90px !important;font-size:10px;text-align:right;flex-shrink:0;}
+  .bar-track{flex:1;min-width:0;}
+  .bar-val{width:auto;font-size:10px;flex-shrink:0;}
+  .counties-source{font-size:9px !important;line-height:1.4;}
   .bar-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;}
   .bar-table-wrap table{min-width:480px;font-size:10px;}
   .npp-grid{grid-template-columns:1fr;}
@@ -369,7 +370,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
         <div class="bar-row"><span class="bar-name" style="width:130px;">Sacramento</span><div class="bar-track"><div class="bar-fill-inner" style="width:13.8%;background:var(--blue);"></div></div><span class="bar-val">262,012 · 28.5%</span></div>
         <div class="bar-row"><span class="bar-name" style="width:130px;">Alameda</span><div class="bar-track"><div class="bar-fill-inner" style="width:12.9%;background:var(--blue);"></div></div><span class="bar-val">244,535 · 25.2%</span></div>
         <div class="bar-row"><span class="bar-name" style="width:130px;">San Francisco</span><div class="bar-track"><div class="bar-fill-inner" style="width:9.3%;background:var(--blue);"></div></div><span class="bar-val">176,467 · 33.1%</span></div>
-                <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-top:10px;">Source: CA SOS county reporting status · Jun 8, 2026, 12:00 p.m. · Statewide: 7,102,109 ballots cast · 30.7% turnout.</div>
+                <div class="counties-source" style="font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-top:10px;">Source: CA SOS county reporting status · Jun 8, 2026, 12:00 p.m. · Statewide: 7,102,109 ballots cast · 30.7% turnout.</div>
       </div>
       <div class="card">
         <div class="sl" style="margin-bottom:12px;">Estimated outstanding ballots — BAR report Jun 8 12:00 p.m.</div>
