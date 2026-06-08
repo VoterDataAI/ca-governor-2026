@@ -1,0 +1,506 @@
+[
+  {
+    "fetched_at": "2026-06-03T16:00:12.213018",
+    "reporting_time": "June 3, 2026, 2:05 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1267375,
+        "party": "Dem",
+        "pct": 25.4
+      },
+      "Tom Steyer": {
+        "votes": 979265,
+        "party": "Dem",
+        "pct": 19.6
+      },
+      "Chad Bianco": {
+        "votes": 567033,
+        "party": "Rep",
+        "pct": 11.3
+      },
+      "Steve Hilton": {
+        "votes": 1387459,
+        "party": "Rep",
+        "pct": 27.8
+      }
+    },
+    "party_totals": {
+      "Dem": 2896001,
+      "Rep": 2029821,
+      "NPP": 44784,
+      "Lib": 5804,
+      "PF": 21310,
+      "Other": 0
+    },
+    "total_gov_votes": 4997720
+  },
+  {
+    "fetched_at": "2026-06-03T18:06:00.376696",
+    "reporting_time": "June 3, 2026, 5:48 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1310710,
+        "party": "Dem",
+        "pct": 25.5
+      },
+      "Tom Steyer": {
+        "votes": 1013488,
+        "party": "Dem",
+        "pct": 19.7
+      },
+      "Chad Bianco": {
+        "votes": 579839,
+        "party": "Rep",
+        "pct": 11.3
+      },
+      "Steve Hilton": {
+        "votes": 1417689,
+        "party": "Rep",
+        "pct": 27.6
+      }
+    },
+    "party_totals": {
+      "Dem": 2987684,
+      "Rep": 2074305,
+      "NPP": 45558,
+      "Lib": 5915,
+      "PF": 21967,
+      "Other": 0
+    },
+    "total_gov_votes": 5135429
+  },
+  {
+    "fetched_at": "2026-06-04T10:40:21.036460",
+    "reporting_time": "June 4, 2026, 10:23 a.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1322704,
+        "party": "Dem",
+        "pct": 25.6
+      },
+      "Tom Steyer": {
+        "votes": 1022601,
+        "party": "Dem",
+        "pct": 19.8
+      },
+      "Chad Bianco": {
+        "votes": 580746,
+        "party": "Rep",
+        "pct": 11.2
+      },
+      "Steve Hilton": {
+        "votes": 1423464,
+        "party": "Rep",
+        "pct": 27.5
+      }
+    },
+    "party_totals": {
+      "Dem": 3012855,
+      "Rep": 2081225,
+      "NPP": 45696,
+      "Lib": 5940,
+      "PF": 22057,
+      "Other": 0
+    },
+    "total_gov_votes": 5167773
+  },
+  {
+    "fetched_at": "2026-06-04T20:54:21.543150",
+    "reporting_time": "June 4, 2026, 6:18 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1468111,
+        "party": "Dem",
+        "pct": 26.0
+      },
+      "Tom Steyer": {
+        "votes": 1138088,
+        "party": "Dem",
+        "pct": 20.2
+      },
+      "Chad Bianco": {
+        "votes": 628281,
+        "party": "Rep",
+        "pct": 11.1
+      },
+      "Steve Hilton": {
+        "votes": 1532037,
+        "party": "Rep",
+        "pct": 27.2
+      }
+    },
+    "party_totals": {
+      "Dem": 3317714,
+      "Rep": 2240930,
+      "NPP": 48663,
+      "Lib": 6266,
+      "PF": 24380,
+      "Other": 0
+    },
+    "total_gov_votes": 5637953
+  },
+  {
+    "fetched_at": "2026-06-04T21:54:22.760124",
+    "reporting_time": "June 4, 2026, 7:44 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1470100,
+        "party": "Dem",
+        "pct": 26.0
+      },
+      "Tom Steyer": {
+        "votes": 1139517,
+        "party": "Dem",
+        "pct": 20.2
+      },
+      "Chad Bianco": {
+        "votes": 629109,
+        "party": "Rep",
+        "pct": 11.1
+      },
+      "Steve Hilton": {
+        "votes": 1533435,
+        "party": "Rep",
+        "pct": 27.2
+      }
+    },
+    "party_totals": {
+      "Dem": 3321793,
+      "Rep": 2243227,
+      "NPP": 48713,
+      "Lib": 6274,
+      "PF": 24399,
+      "Other": 0
+    },
+    "total_gov_votes": 5644406
+  },
+  {
+    "fetched_at": "2026-06-05T10:41:13.220692",
+    "reporting_time": "June 5, 2026, 10:26 a.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1470970,
+        "party": "Dem",
+        "pct": 26.0
+      },
+      "Tom Steyer": {
+        "votes": 1140475,
+        "party": "Dem",
+        "pct": 20.2
+      },
+      "Chad Bianco": {
+        "votes": 630142,
+        "party": "Rep",
+        "pct": 11.2
+      },
+      "Steve Hilton": {
+        "votes": 1535566,
+        "party": "Rep",
+        "pct": 27.2
+      }
+    },
+    "party_totals": {
+      "Dem": 3324050,
+      "Rep": 2246467,
+      "NPP": 48752,
+      "Lib": 6282,
+      "PF": 24413,
+      "Other": 0
+    },
+    "total_gov_votes": 5649964
+  },
+  {
+    "fetched_at": "2026-06-05T17:26:32.325912",
+    "reporting_time": "June 5, 2026, 5:12 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1687114,
+        "party": "Dem",
+        "pct": 26.7
+      },
+      "Tom Steyer": {
+        "votes": 1327449,
+        "party": "Dem",
+        "pct": 21.0
+      },
+      "Chad Bianco": {
+        "votes": 675663,
+        "party": "Rep",
+        "pct": 10.7
+      },
+      "Steve Hilton": {
+        "votes": 1665598,
+        "party": "Rep",
+        "pct": 26.4
+      }
+    },
+    "party_totals": {
+      "Dem": 3798550,
+      "Rep": 2426710,
+      "NPP": 52236,
+      "Lib": 6729,
+      "PF": 28745,
+      "Other": 0
+    },
+    "total_gov_votes": 6312970
+  },
+  {
+    "fetched_at": "2026-06-05T17:56:32.964510",
+    "reporting_time": "June 5, 2026, 5:21 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1688368,
+        "party": "Dem",
+        "pct": 26.7
+      },
+      "Tom Steyer": {
+        "votes": 1328227,
+        "party": "Dem",
+        "pct": 21.0
+      },
+      "Chad Bianco": {
+        "votes": 676549,
+        "party": "Rep",
+        "pct": 10.7
+      },
+      "Steve Hilton": {
+        "votes": 1666320,
+        "party": "Rep",
+        "pct": 26.4
+      }
+    },
+    "party_totals": {
+      "Dem": 3800942,
+      "Rep": 2428368,
+      "NPP": 52274,
+      "Lib": 6733,
+      "PF": 28784,
+      "Other": 0
+    },
+    "total_gov_votes": 6317101
+  },
+  {
+    "fetched_at": "2026-06-05T18:26:33.435374",
+    "reporting_time": "June 5, 2026, 6:00 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1720786,
+        "party": "Dem",
+        "pct": 26.8
+      },
+      "Tom Steyer": {
+        "votes": 1353302,
+        "party": "Dem",
+        "pct": 21.1
+      },
+      "Chad Bianco": {
+        "votes": 690508,
+        "party": "Rep",
+        "pct": 10.7
+      },
+      "Steve Hilton": {
+        "votes": 1691360,
+        "party": "Rep",
+        "pct": 26.3
+      }
+    },
+    "party_totals": {
+      "Dem": 3866641,
+      "Rep": 2468030,
+      "NPP": 53080,
+      "Lib": 6786,
+      "PF": 29433,
+      "Other": 0
+    },
+    "total_gov_votes": 6423970
+  },
+  {
+    "fetched_at": "2026-06-05T23:36:15.004168",
+    "reporting_time": "June 5, 2026, 7:10 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1732755,
+        "party": "Dem",
+        "pct": 26.8
+      },
+      "Tom Steyer": {
+        "votes": 1361104,
+        "party": "Dem",
+        "pct": 21.0
+      },
+      "Chad Bianco": {
+        "votes": 697440,
+        "party": "Rep",
+        "pct": 10.8
+      },
+      "Steve Hilton": {
+        "votes": 1704820,
+        "party": "Rep",
+        "pct": 26.4
+      }
+    },
+    "party_totals": {
+      "Dem": 3890369,
+      "Rep": 2488965,
+      "NPP": 53498,
+      "Lib": 6812,
+      "PF": 29700,
+      "Other": 0
+    },
+    "total_gov_votes": 6469344
+  },
+  {
+    "fetched_at": "2026-06-06T19:08:29.289646",
+    "reporting_time": "June 6, 2026, 6:04 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1824635,
+        "party": "Dem",
+        "pct": 27.0
+      },
+      "Tom Steyer": {
+        "votes": 1437976,
+        "party": "Dem",
+        "pct": 21.3
+      },
+      "Chad Bianco": {
+        "votes": 719842,
+        "party": "Rep",
+        "pct": 10.7
+      },
+      "Steve Hilton": {
+        "votes": 1757533,
+        "party": "Rep",
+        "pct": 26.0
+      }
+    },
+    "party_totals": {
+      "Dem": 4087198,
+      "Rep": 2566364,
+      "NPP": 55125,
+      "Lib": 7060,
+      "PF": 31920,
+      "Other": 0
+    },
+    "total_gov_votes": 6747667
+  },
+  {
+    "fetched_at": "2026-06-06T21:44:01.823986",
+    "reporting_time": "June 6, 2026, 8:18 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1827195,
+        "party": "Dem",
+        "pct": 27.0
+      },
+      "Tom Steyer": {
+        "votes": 1439865,
+        "party": "Dem",
+        "pct": 21.3
+      },
+      "Chad Bianco": {
+        "votes": 723882,
+        "party": "Rep",
+        "pct": 10.7
+      },
+      "Steve Hilton": {
+        "votes": 1763414,
+        "party": "Rep",
+        "pct": 26.1
+      }
+    },
+    "party_totals": {
+      "Dem": 4092563,
+      "Rep": 2576481,
+      "NPP": 55253,
+      "Lib": 7086,
+      "PF": 31979,
+      "Other": 0
+    },
+    "total_gov_votes": 6763362
+  },
+  {
+    "fetched_at": "2026-06-07T19:10:25.578217",
+    "reporting_time": "June 7, 2026, 5:08 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1882399,
+        "party": "Dem",
+        "pct": 27.2
+      },
+      "Tom Steyer": {
+        "votes": 1487806,
+        "party": "Dem",
+        "pct": 21.5
+      },
+      "Chad Bianco": {
+        "votes": 730243,
+        "party": "Rep",
+        "pct": 10.6
+      },
+      "Steve Hilton": {
+        "votes": 1787476,
+        "party": "Rep",
+        "pct": 25.8
+      }
+    },
+    "party_totals": {
+      "Dem": 4213424,
+      "Rep": 2608079,
+      "NPP": 56189,
+      "Lib": 7234,
+      "PF": 33475,
+      "Other": 0
+    },
+    "total_gov_votes": 6918401
+  },
+  {
+    "fetched_at": "2026-06-07T21:52:29.590886",
+    "reporting_time": "June 7, 2026, 6:33 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 1883083,
+        "party": "Dem",
+        "pct": 27.2
+      },
+      "Tom Steyer": {
+        "votes": 1488520,
+        "party": "Dem",
+        "pct": 21.5
+      },
+      "Chad Bianco": {
+        "votes": 732038,
+        "party": "Rep",
+        "pct": 10.6
+      },
+      "Steve Hilton": {
+        "votes": 1790532,
+        "party": "Rep",
+        "pct": 25.9
+      }
+    },
+    "party_totals": {
+      "Dem": 4215210,
+      "Rep": 2613018,
+      "NPP": 56250,
+      "Lib": 7251,
+      "PF": 33491,
+      "Other": 0
+    },
+    "total_gov_votes": 6925220
+  }
+]
