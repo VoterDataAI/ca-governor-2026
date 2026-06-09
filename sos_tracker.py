@@ -51,7 +51,7 @@ API_ENDPOINTS = [
     "https://dp.electionresults.sos.ca.gov/returns/governor",
 ]
 
-SNAPSHOT_FILE = "sos_snapshots.json"
+SNAPSHOT_FILE = str(Path(__file__).parent / "sos_snapshots.json")
 CANDIDATES_TO_TRACK = ["Steve Hilton", "Xavier Becerra", "Tom Steyer", "Chad Bianco"]
 DEFAULT_INTERVAL_MINUTES = 30
 

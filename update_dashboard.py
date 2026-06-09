@@ -362,9 +362,9 @@ def js_str_arr(lst):
 # ── Counties section HTML ─────────────────────────────────────────────────────
 if counties:
     c_data      = counties['counties']
-    sw_ballots  = counties['statewide_ballots_cast']
+    sw_ballots  = counties['statewide_cast']
     sw_turnout  = counties['statewide_turnout_pct']
-    sw_out      = counties['statewide_outstanding']
+    sw_out      = counties['statewide_unprocessed']
     sw_cure     = counties['statewide_to_cure']
     c_as_of     = counties['as_of']
 
@@ -746,21 +746,43 @@ if counties:
     html = re.sub(pattern, rf'\g<1>{top10_html}        \g<3>', html, count=1, flags=re.DOTALL)
 
     # Top 10 source line — full replacement using marker search
-    src_marker = 'Source: CA SOS county reporting status'
-    src_start = html.find(src_marker)
-    if src_start != -1:
-        src_end = html.index('</div>', src_start)
+    src_marker = 'counties-source'
+    src_idx = html.find(src_marker)
+    if src_idx != -1:
+        src_start = html.index('>', src_idx) + 1
+        src_end   = html.index('</div>', src_start)
         html = html[:src_start] + top10_src + html[src_end:]
     else:
-        print("  WARNING: counties source line not found in HTML")
+        # Fallback: find by text content
+        src_marker2 = 'Source: CA SOS county reporting status'
+        src_start = html.find(src_marker2)
+        if src_start != -1:
+            src_end = html.index('</div>', src_start)
+            html = html[:src_start] + top10_src + html[src_end:]
+        else:
+            print("  WARNING: counties source line not found in HTML")
 
     # BAR table rows
     pattern = r'(<tbody>)(.*?)(</tbody>)'
-    # Only replace the second tbody (BAR table)
-    tbodies = list(re.finditer(r'<tbody>(.*?)</tbody>', html, re.DOTALL))
-    if len(tbodies) >= 2:
-        second = tbodies[1]
-        html = html[:second.start()] + f'<tbody>\n{bar_rows_html}          </tbody>' + html[second.end():]
+    # Replace the BAR table tbody — find it by its proximity to bar-table-wrap
+    bar_wrap_idx = html.find('class="bar-table-wrap"')
+    if bar_wrap_idx == -1:
+        bar_wrap_idx = html.find('bar-table-wrap')
+    if bar_wrap_idx != -1:
+        tbody_start = html.find('<tbody>', bar_wrap_idx)
+        tbody_end   = html.find('</tbody>', tbody_start) + len('</tbody>')
+        if tbody_start != -1 and tbody_end > tbody_start:
+            html = html[:tbody_start] + f'<tbody>\n{bar_rows_html}          </tbody>' + html[tbody_end:]
+        else:
+            print("  WARNING: BAR tbody not found after bar-table-wrap")
+    else:
+        # Fallback: replace second tbody
+        tbodies = list(re.finditer(r'<tbody>(.*?)</tbody>', html, re.DOTALL))
+        if len(tbodies) >= 2:
+            second = tbodies[1]
+            html = html[:second.start()] + f'<tbody>\n{bar_rows_html}          </tbody>' + html[second.end():]
+        else:
+            print("  WARNING: Could not locate BAR table tbody")
 
     # BAR note
     pattern = r'(<div style="margin-top:12px;padding:10px 14px;background:var\(--surface2\);border-radius:4px;border-left:2px solid var\(--blue\);font-family:var\(--mono\);font-size:11px;color:var\(--text-mid\);line-height:1\.6;">)(.*?)(</div>)'
