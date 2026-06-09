@@ -230,6 +230,8 @@ else:
 
 # B-S gap
 BS_GAP = B - S
+# H-S gap (for Steyer card)
+HS_GAP = H - S
 
 # D-R aggregate
 D_PCT  = round(D_VOTES / TOTAL_GOV * 100, 1)
@@ -452,7 +454,7 @@ else:
     delta_str = ""
 
 c1_gap = abs(canvass_rows[0]['hilton'] - canvass_rows[0]['becerra'])
-alert_html = f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str} — a complete reversal from Hilton\'s peak lead of +{c1_gap:,} at C1 (Jun 3). {delta_str}. <strong>{sw_out:,} ballots remain outstanding statewide</strong> per the BAR unprocessed ballots report ({c_as_of}) — the vast majority in D-leaning counties. {alert_trail_str}''' if sw_out else f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str}. {delta_str}.'''
+alert_html = f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str} — a complete reversal from Hilton\'s peak lead of +{c1_gap:,} at C1 (Jun 3). Becerra advances to the November general election. <strong>{sw_out:,} ballots remain outstanding statewide</strong> per the BAR unprocessed ballots report ({c_as_of}) — the vast majority in D-leaning counties. {alert_trail_str}''' if sw_out else f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str}. Becerra advances to the November general election.'''
 
 # ── Header subtitle ───────────────────────────────────────────────────────────
 hdr_sub = f"Latest: {CID} · {CDT.replace(' · ', ', ')} · {SNAP_COUNT} total snapshots · Unofficial results"
@@ -488,6 +490,20 @@ b_pct_sign  = f'+{B_PCT_DELTA}pts' if B_PCT_DELTA > 0 else f'−{abs(B_PCT_DELTA
 # ── Read and update HTML ──────────────────────────────────────────────────────
 with open(args.html) as f:
     html = f.read()
+
+# ── Structural guards — ensure critical elements are always correct ────────────
+# Fix header tag if class is missing
+if '<header>' in html:
+    html = html.replace('<header>', '<header class="header">', 1)
+    print("  Fixed: <header> was missing class='header'")
+
+# Fix state-flag badge if missing from header-left
+if 'class="header-left"' in html and 'class="state-flag"' not in html:
+    html = html.replace(
+        '<div class="header-left">',
+        '<div class="header-left">\n    <div class="state-flag">CA</div>',
+        1)
+    print("  Fixed: state-flag badge was missing from header-left")
 
 def set_id_content(html, id_, new_content):
     """Replace the inner content of the first element with the given id."""
@@ -541,7 +557,10 @@ def update_ccard(html, candidate, votes, pct, pct_delta_str, pct_sign, place_lab
             else:
                 cpct_str = f'{pct}% · trails Becerra by {abs_gap:,}'
         else:  # steyer
-            cpct_str = f'{pct}% · B-S gap: +{bs_gap:,}'
+            hs = bs_gap  # bs_gap is now passed as H-S value
+            hs_sign = '+' if hs >= 0 else '−'
+            hs_abs = abs(hs)
+            cpct_str = f'{pct}% · H-S gap: {hs_sign}{hs_abs:,}'
         block = re.sub(r'(<div class="cpct">)[^<]*(</div>)',
                        rf'\g<1>{cpct_str}\2', block)
         # delta
@@ -569,7 +588,7 @@ if GAP < 0:  # Becerra leads
 else:
     html = update_ccard(html, 'hilton',  H, H_P, h_pct_sign, h_pct_sign, h_place_label, H_BAR, 'leads', ABS_GAP)
     html = update_ccard(html, 'becerra', B, B_P, b_pct_sign, b_pct_sign, b_place_label, B_BAR, 'trails', ABS_GAP)
-html = update_ccard(html, 'steyer', S, S_P, '', '', 'Democrat · 3rd · eliminated', S_BAR, 'eliminated', ABS_GAP, BS_GAP)
+html = update_ccard(html, 'steyer', S, S_P, '', '', 'Democrat · 3rd · eliminated', S_BAR, 'eliminated', ABS_GAP, HS_GAP)
 
 # ── crank / placement numbers ─────────────────────────────────────────────────
 # Swap the "1" and "2" crank numbers based on who leads
