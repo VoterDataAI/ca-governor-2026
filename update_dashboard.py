@@ -392,9 +392,9 @@ if counties:
         top10_html += f'''        <div class="bar-row"><span class="bar-name" style="width:130px;">{c["name"]}</span><div class="bar-track"><div class="bar-fill-inner" style="width:{pct_of_max}%;background:{color};"></div></div><span class="bar-val">{c["ballots_cast"]:,} · {c["turnout_pct"]}%</span></div>\n'''
     top10_src = f'Source: CA SOS county reporting status · {c_as_of} · Statewide: {sw_ballots:,} ballots cast · {sw_turnout}% turnout.'
 
-    # BAR table rows — counties with outstanding > 20k, sorted by outstanding desc
-    bar_counties = [c for c in c_data if c.get('outstanding',0) > 20000]
-    bar_counties.sort(key=lambda x: x.get('outstanding',0), reverse=True)
+    # BAR table rows — counties with unprocessed > 20k, sorted by unprocessed desc
+    bar_counties = [c for c in c_data if c.get('unprocessed',0) > 20000]
+    bar_counties.sort(key=lambda x: x.get('unprocessed',0), reverse=True)
 
     bar_rows_html = ""
     for c in bar_counties:
@@ -406,10 +406,10 @@ if counties:
             lean_html = f'<span class="cv-lean {css}">{lean}</span>'
         is_cur_class = ' class="cur"' if c['name'] == 'Los Angeles' else ''
         proc = c.get('bar_processed', c['ballots_cast'])
-        bar_rows_html += f'''            <tr{is_cur_class}><td><strong>{c["name"]}</strong></td><td>{proc:,}</td><td style="color:var(--gold);">{c.get("outstanding",0):,}</td><td>{c.get("next_report","—")}</td><td>{lean_html}</td></tr>\n'''
+        bar_rows_html += f'''            <tr{is_cur_class}><td><strong>{c["name"]}</strong></td><td>{proc:,}</td><td style="color:var(--gold);">{c.get("unprocessed",0):,}</td><td>{c.get("next_report","—")}</td><td>{lean_html}</td></tr>\n'''
 
     if sw_out and sw_cure:
-        bar_note_html = f'<strong style="color:var(--text);">Statewide: {sw_out:,} ballots outstanding · {sw_cure:,} left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has {[c for c in c_data if c["name"]=="Los Angeles"][0].get("outstanding",0):,} remaining.'
+        bar_note_html = f'<strong style="color:var(--text);">Statewide: {sw_out:,} ballots outstanding · {sw_cure:,} left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has {[c for c in c_data if c["name"]=="Los Angeles"][0].get("unprocessed",0):,} remaining.'
     else:
         bar_note_html = f'<strong style="color:var(--text);">Unprocessed ballot data pending.</strong> Next BAR report expected soon — statewide outstanding count will update when available.'
 
@@ -746,21 +746,14 @@ if counties:
     html = re.sub(pattern, rf'\g<1>{top10_html}        \g<3>', html, count=1, flags=re.DOTALL)
 
     # Top 10 source line — full replacement using marker search
-    src_marker = 'counties-source'
+    src_marker = 'class="counties-source"'
     src_idx = html.find(src_marker)
     if src_idx != -1:
         src_start = html.index('>', src_idx) + 1
         src_end   = html.index('</div>', src_start)
         html = html[:src_start] + top10_src + html[src_end:]
     else:
-        # Fallback: find by text content
-        src_marker2 = 'Source: CA SOS county reporting status'
-        src_start = html.find(src_marker2)
-        if src_start != -1:
-            src_end = html.index('</div>', src_start)
-            html = html[:src_start] + top10_src + html[src_end:]
-        else:
-            print("  WARNING: counties source line not found in HTML")
+        print("  WARNING: counties source line (class='counties-source') not found in HTML")
 
     # BAR table rows
     pattern = r'(<tbody>)(.*?)(</tbody>)'
