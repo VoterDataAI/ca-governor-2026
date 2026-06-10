@@ -2,11 +2,11 @@
 """
 update_dashboard.py — CA Governor 2026 canvass tracker dashboard updater
 Reads: sos_snapshots.json + counties_data.json
-Writes: ca_governor_2026_dashboard.html (ready to rename index.html and upload)
+Writes: index.html (published directly to GitHub Pages)
 
 Usage:
     python3 update_dashboard.py
-    python3 update_dashboard.py --html ca_governor_2026_dashboard.html
+    python3 update_dashboard.py --html index.html
     python3 update_dashboard.py --snapshots sos_snapshots.json --counties counties_data.json
 """
 
@@ -20,7 +20,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument('--snapshots', default='sos_snapshots.json')
 parser.add_argument('--counties',  default='counties_data.json')
-parser.add_argument('--html',      default='ca_governor_2026_dashboard.html')
+parser.add_argument('--html',      default='index.html')
 parser.add_argument('--out',       default=None,
                     help='Output path (defaults to overwriting --html)')
 args = parser.parse_args()
@@ -880,4 +880,4 @@ if sw_ballots:
 print(f"  Snapshots:   {SNAP_COUNT} ({en_count} EN + {cv_count} canvass)")
 print(f"  Charts:      {len(ALL_LABS)} labels · {len(ALL_BATCH_LABS)} batch points")
 print(f"{'='*60}")
-print(f"\nTo publish: cp {OUT_PATH} index.html && git add index.html && git commit -m '{CID} update' && git push")
+print(f"\nTo publish: git add index.html && git commit -m '{CID} update' && git push")
