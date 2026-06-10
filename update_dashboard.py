@@ -230,8 +230,6 @@ else:
 
 # B-S gap
 BS_GAP = B - S
-# H-S gap (for Steyer card)
-HS_GAP = H - S
 
 # D-R aggregate
 D_PCT  = round(D_VOTES / TOTAL_GOV * 100, 1)
@@ -378,7 +376,32 @@ if counties:
         "D-leaning":  "lean-d",
         "Mixed":      "lean-mix",
         "R-leaning":  "lean-r",
+        "Strong R":   "lean-r",
         "":           "lean-mix",
+    }
+
+    # Hardcoded county partisan leans (stable, based on historical registration + vote patterns)
+    county_lean = {
+        "Alameda": "Strong D", "Alpine": "D-leaning", "Amador": "R-leaning",
+        "Butte": "R-leaning", "Calaveras": "R-leaning", "Colusa": "R-leaning",
+        "Contra Costa": "D-leaning", "Del Norte": "R-leaning", "El Dorado": "Strong R",
+        "Fresno": "Mixed", "Glenn": "R-leaning", "Humboldt": "D-leaning",
+        "Imperial": "D-leaning", "Inyo": "R-leaning", "Kern": "R-leaning",
+        "Kings": "R-leaning", "Lake": "D-leaning", "Lassen": "Strong R",
+        "Los Angeles": "Strong D", "Madera": "R-leaning", "Marin": "Strong D",
+        "Mariposa": "R-leaning", "Mendocino": "D-leaning", "Merced": "Mixed",
+        "Modoc": "Strong R", "Mono": "Mixed", "Monterey": "D-leaning",
+        "Napa": "D-leaning", "Nevada": "Mixed", "Orange": "Mixed",
+        "Placer": "R-leaning", "Plumas": "R-leaning", "Riverside": "Mixed",
+        "Sacramento": "D-leaning", "San Benito": "Mixed", "San Bernardino": "Mixed",
+        "San Diego": "Mixed", "San Francisco": "Strong D", "San Joaquin": "Mixed",
+        "San Luis Obispo": "Mixed", "San Mateo": "Strong D", "Santa Barbara": "Mixed",
+        "Santa Clara": "Strong D", "Santa Cruz": "Strong D", "Shasta": "Strong R",
+        "Sierra": "R-leaning", "Siskiyou": "R-leaning", "Solano": "D-leaning",
+        "Sonoma": "Strong D", "Stanislaus": "Mixed", "Sutter": "R-leaning",
+        "Tehama": "Strong R", "Trinity": "R-leaning", "Tulare": "Strong R",
+        "Tuolumne": "R-leaning", "Ventura": "Mixed", "Yolo": "Strong D",
+        "Yuba": "R-leaning",
     }
 
     # Top 10 bar rows
@@ -400,15 +423,18 @@ if counties:
 
     bar_rows_html = ""
     for c in bar_counties:
-        lean = c.get('lean','')
-        css  = lean_css.get(lean,'lean-mix')
-        if lean == 'R-leaning':
-            lean_html = f'<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:rgba(224,48,48,0.15);color:var(--red);">{lean}</span>'
+        lean = county_lean.get(c['name'], 'Mixed')
+        css  = lean_css.get(lean, 'lean-mix')
+        if lean in ('R-leaning', 'Strong R'):
+            lean_html = f'<span style="font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(224,48,48,0.15);color:var(--red);">{lean}</span>'
+        elif lean in ('Strong D', 'D-leaning'):
+            lean_html = f'<span style="font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(37,99,235,0.15);color:var(--blue);">{lean}</span>'
         else:
-            lean_html = f'<span class="cv-lean {css}">{lean}</span>'
+            lean_html = f'<span style="font-size:10px;padding:2px 6px;border-radius:3px;background:rgba(124,58,237,0.15);color:var(--purple);">{lean}</span>'
         is_cur_class = ' class="cur"' if c['name'] == 'Los Angeles' else ''
         proc = c.get('bar_processed', c['ballots_cast'])
-        bar_rows_html += f'''            <tr{is_cur_class}><td><strong>{c["name"]}</strong></td><td>{proc:,}</td><td style="color:var(--gold);">{c.get("unprocessed",0):,}</td><td>{c.get("next_report","—")}</td><td>{lean_html}</td></tr>\n'''
+        to_cure = c.get('to_cure', 0)
+        bar_rows_html += f'''            <tr{is_cur_class}><td><strong>{c["name"]}</strong></td><td>{proc:,}</td><td style="color:var(--gold);">{c.get("unprocessed",0):,}</td><td style="color:var(--text-dim);">{to_cure:,}</td><td>{lean_html}</td></tr>\n'''
 
     if sw_out and sw_cure:
         bar_note_html = f'<strong style="color:var(--text);">Statewide: {sw_out:,} ballots outstanding · {sw_cure:,} left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has {[c for c in c_data if c["name"]=="Los Angeles"][0].get("unprocessed",0):,} remaining.'
@@ -491,20 +517,6 @@ b_pct_sign  = f'+{B_PCT_DELTA}pts' if B_PCT_DELTA > 0 else f'−{abs(B_PCT_DELTA
 with open(args.html) as f:
     html = f.read()
 
-# ── Structural guards — ensure critical elements are always correct ────────────
-# Fix header tag if class is missing
-if '<header>' in html:
-    html = html.replace('<header>', '<header class="header">', 1)
-    print("  Fixed: <header> was missing class='header'")
-
-# Fix state-flag badge if missing from header-left
-if 'class="header-left"' in html and 'class="state-flag"' not in html:
-    html = html.replace(
-        '<div class="header-left">',
-        '<div class="header-left">\n    <div class="state-flag">CA</div>',
-        1)
-    print("  Fixed: state-flag badge was missing from header-left")
-
 def set_id_content(html, id_, new_content):
     """Replace the inner content of the first element with the given id."""
     pattern = rf'(id="{re.escape(id_)}"[^>]*>)(.*?)(<)'
@@ -557,10 +569,7 @@ def update_ccard(html, candidate, votes, pct, pct_delta_str, pct_sign, place_lab
             else:
                 cpct_str = f'{pct}% · trails Becerra by {abs_gap:,}'
         else:  # steyer
-            hs = bs_gap  # bs_gap is now passed as H-S value
-            hs_sign = '+' if hs >= 0 else '−'
-            hs_abs = abs(hs)
-            cpct_str = f'{pct}% · H-S gap: {hs_sign}{hs_abs:,}'
+            cpct_str = f'{pct}% · B-S gap: +{bs_gap:,}'
         block = re.sub(r'(<div class="cpct">)[^<]*(</div>)',
                        rf'\g<1>{cpct_str}\2', block)
         # delta
@@ -588,7 +597,7 @@ if GAP < 0:  # Becerra leads
 else:
     html = update_ccard(html, 'hilton',  H, H_P, h_pct_sign, h_pct_sign, h_place_label, H_BAR, 'leads', ABS_GAP)
     html = update_ccard(html, 'becerra', B, B_P, b_pct_sign, b_pct_sign, b_place_label, B_BAR, 'trails', ABS_GAP)
-html = update_ccard(html, 'steyer', S, S_P, '', '', 'Democrat · 3rd · eliminated', S_BAR, 'eliminated', ABS_GAP, HS_GAP)
+html = update_ccard(html, 'steyer', S, S_P, '', '', 'Democrat · 3rd · eliminated', S_BAR, 'eliminated', ABS_GAP, BS_GAP)
 
 # ── crank / placement numbers ─────────────────────────────────────────────────
 # Swap the "1" and "2" crank numbers based on who leads
@@ -776,6 +785,14 @@ if counties:
 
     # BAR table rows
     pattern = r'(<tbody>)(.*?)(</tbody>)'
+    # Ensure BAR table is in its own card with correct heading
+    if 'Unprocessed ballots by county — BAR report' not in html:
+        html = html.replace(
+            '</div>\n        <div class="bar-table-wrap">',
+            '</div>\n      </div>\n      <div class="card">\n        <div class="sl" style="margin-bottom:12px;">Unprocessed ballots by county — BAR report</div>\n        <div class="bar-table-wrap">',
+            1)
+        print("  Fixed: BAR table split into separate card")
+
     # Replace the BAR table tbody — find it by its proximity to bar-table-wrap
     bar_wrap_idx = html.find('class="bar-table-wrap"')
     if bar_wrap_idx == -1:
