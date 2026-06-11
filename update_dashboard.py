@@ -606,10 +606,11 @@ if GAP < 0:  # Becerra 1st, Hilton 2nd — already correct in current HTML
 
 # ── Header ────────────────────────────────────────────────────────────────────
 html = set_id_content(html, 'hdr-sub', hdr_sub)
+html = set_id_content(html, 'hdr-total-ballots', f'{TOTAL_GOV:,}')
 if sw_ballots:
-    html = set_id_content(html, 'hdr-total-ballots', f'{sw_ballots:,}')
-    html = set_id_content(html, 'hdr-turnout',       f'{sw_turnout}%')
-html = set_id_content(html, 'hdr-gov-votes', f'{TOTAL_GOV:,}')
+    html = set_id_content(html, 'hdr-turnout', f'{sw_turnout}%')
+if sw_out:
+    html = set_id_content(html, 'hdr-gov-votes', f'{sw_out:,}')
 html = set_id_content(html, 'hdr-lead',       f'+{ABS_GAP:,}')
 html = set_id_content(html, 'hdr-lead-label', f'{LEADER} lead · current')
 html = set_id_style_attr(html, 'hdr-lead', 'color', LEADER_COLOR)
