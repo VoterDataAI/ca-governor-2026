@@ -142,10 +142,13 @@ for i, snap in enumerate(snapshots):
     delta_raw = raw_gap - prev
     if delta_raw < 0:
         gap_delta = f"↓{delta_raw:,}".replace('-','−')  # Steyer closing on Hilton
+        delta_dir = 'b'  # blue — Steyer gained
     elif delta_raw > 0:
         gap_delta = f"↑+{delta_raw:,}"
+        delta_dir = 'r'  # red — Hilton gained
     else:
         gap_delta = "—"
+        delta_dir = 'n'  # neutral — no change
 
     # Batch D share — share of newly added governor votes going to D candidates
     if i == 0:
@@ -180,7 +183,7 @@ for i, snap in enumerate(snapshots):
         "becerra": b, "becerra_pct": b_p,
         "steyer": s, "steyer_pct": s_p,
         "raw_gap": raw_gap, "abs_gap": abs_gap, "gap_dir": gap_dir,
-        "gap_delta": gap_delta, "d_bat": d_bat,
+        "gap_delta": gap_delta, "delta_dir": delta_dir, "d_bat": d_bat,
         "batch_h": round(batch_r > 0 and (h - (snapshots[i-1]['candidates']['Steve Hilton']['votes'] if i>0 else EN_H)) / batch_total * 100, 1) if batch_total > 0 else 0,
         "batch_b": round((b - (snapshots[i-1]['candidates']['Xavier Becerra']['votes'] if i>0 else EN_B)) / batch_total * 100, 1) if batch_total > 0 else 0,
         "batch_s": round((s - (snapshots[i-1]['candidates']['Tom Steyer']['votes'] if i>0 else EN_S)) / batch_total * 100, 1) if batch_total > 0 else 0,
@@ -270,10 +273,12 @@ def snap_row_html(r, row_class=""):
 
     if r.get('is_peak'):
         gap_delta_td = f'<td style="color:var(--text-dim);">{r["gap_delta"]}</td>'
-    elif r['gap_dir'] == 'r':
+    elif r['delta_dir'] == 'r':
         gap_delta_td = f'<td style="color:var(--red);">{r["gap_delta"]}</td>'
-    else:
+    elif r['delta_dir'] == 'b':
         gap_delta_td = f'<td style="color:var(--blue);">{r["gap_delta"]}</td>'
+    else:
+        gap_delta_td = f'<td style="color:var(--text-dim);">{r["gap_delta"]}</td>'
 
     d_bat_td = f'<td style="color:var(--blue);">{r["d_bat"]}</td>' if '%' in str(r["d_bat"]) else f'<td style="color:var(--text-dim);">{r["d_bat"]}</td>'
 
