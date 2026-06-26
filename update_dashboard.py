@@ -574,7 +574,8 @@ def update_ccard(html, candidate, votes, pct, pct_delta_str, pct_sign, place_lab
             else:
                 cpct_str = f'{pct}% · trails Becerra by {abs_gap:,}'
         else:  # steyer
-            cpct_str = f'{pct}% · B-S gap: +{bs_gap:,}'
+            hs_gap = H - S
+            cpct_str = f'{pct}% · trails Hilton by {hs_gap:,}'
         block = re.sub(r'(<div class="cpct">)[^<]*(</div>)',
                        rf'\g<1>{cpct_str}\2', block)
         # delta
