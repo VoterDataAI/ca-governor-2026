@@ -397,8 +397,24 @@ def load_snapshots():
     return []
 
 
+def next_snapshot_id(all_snapshots):
+    """
+    Compute the next sequential snapshot_id (e.g. 'C27') by scanning
+    existing snapshots for the highest numeric ID seen so far.
+    Works regardless of polling vs. --once mode, and tolerates any
+    prior snapshots that are missing an ID.
+    """
+    max_id = 0
+    for s in all_snapshots:
+        sid = s.get("snapshot_id", "")
+        if sid.startswith("C") and sid[1:].isdigit():
+            max_id = max(max_id, int(sid[1:]))
+    return f"C{max_id + 1}"
+
+
 def save_snapshot(snapshot, all_snapshots):
     """Append latest snapshot to the local log file."""
+    snapshot["snapshot_id"] = next_snapshot_id(all_snapshots)
     all_snapshots.append(snapshot)
     try:
         with open(SNAPSHOT_FILE, "w") as f:

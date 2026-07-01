@@ -995,7 +995,8 @@
       "PF": 51723,
       "Other": 0
     },
-    "total_gov_votes": 9230674
+    "total_gov_votes": 9230674,
+    "snapshot_id": "C27"
   },
   {
     "fetched_at": "2026-06-26T22:29:03.293380",
@@ -1031,6 +1032,81 @@
       "PF": 51756,
       "Other": 0
     },
-    "total_gov_votes": 9232843
+    "total_gov_votes": 9232843,
+    "snapshot_id": "C28"
+  },
+  {
+    "fetched_at": "2026-06-30T08:02:35.526170",
+    "reporting_time": "June 29, 2026, 4:30 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 2590685,
+        "party": "Dem",
+        "pct": 28.1
+      },
+      "Tom Steyer": {
+        "votes": 2109722,
+        "party": "Dem",
+        "pct": 22.8
+      },
+      "Chad Bianco": {
+        "votes": 941247,
+        "party": "Rep",
+        "pct": 10.2
+      },
+      "Steve Hilton": {
+        "votes": 2276101,
+        "party": "Rep",
+        "pct": 24.7
+      }
+    },
+    "party_totals": {
+      "Dem": 5775324,
+      "Rep": 3325428,
+      "NPP": 71187,
+      "Lib": 9321,
+      "PF": 51760,
+      "Other": 0
+    },
+    "total_gov_votes": 9233020,
+    "snapshot_id": "C29"
+  },
+  {
+    "fetched_at": "2026-06-30T23:13:24.537825",
+    "reporting_time": "June 30, 2026, 4:59 p.m.",
+    "reporting_pct": "100% (19,788 of 19,788) precincts reporting",
+    "candidates": {
+      "Xavier Becerra": {
+        "votes": 2590958,
+        "party": "Dem",
+        "pct": 28.1
+      },
+      "Tom Steyer": {
+        "votes": 2109984,
+        "party": "Dem",
+        "pct": 22.9
+      },
+      "Chad Bianco": {
+        "votes": 941323,
+        "party": "Rep",
+        "pct": 10.2
+      },
+      "Steve Hilton": {
+        "votes": 2276271,
+        "party": "Rep",
+        "pct": 24.7
+      }
+    },
+    "party_totals": {
+      "Dem": 5775983,
+      "Rep": 3325690,
+      "NPP": 71193,
+      "Lib": 9324,
+      "PF": 51768,
+      "Other": 0
+    },
+    "total_gov_votes": 9233958,
+    "snapshot_id": "C30"
   }
 ]
