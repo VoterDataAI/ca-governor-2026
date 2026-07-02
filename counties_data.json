@@ -1,9 +1,9 @@
 {
-  "as_of": "Jun 30, 2026, 6:10 PM",
-  "statewide_cast": 9444631,
+  "as_of": "Jul 1, 2026, 6:53 PM",
+  "statewide_cast": 9444764,
   "statewide_turnout_pct": 40.8,
   "statewide_unprocessed": 5,
-  "statewide_to_cure": 12743,
+  "statewide_to_cure": 12700,
   "counties": [
     {
       "name": "Alameda",
@@ -79,12 +79,12 @@
     },
     {
       "name": "El Dorado",
-      "ballots_cast": 76001,
-      "turnout_pct": 55.2,
+      "ballots_cast": 76088,
+      "turnout_pct": 55.3,
       "lean": "Strong R",
       "unprocessed": 0,
       "to_cure": 258,
-      "bar_processed": 76001
+      "bar_processed": 76088
     },
     {
       "name": "Fresno",
@@ -520,12 +520,12 @@
     },
     {
       "name": "Yuba",
-      "ballots_cast": 17360,
-      "turnout_pct": 37.3,
+      "ballots_cast": 17406,
+      "turnout_pct": 37.4,
       "lean": "R-leaning",
       "unprocessed": 0,
-      "to_cure": 225,
-      "bar_processed": 17360
+      "to_cure": 182,
+      "bar_processed": 17406
     }
   ]
 }
