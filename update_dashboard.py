@@ -444,7 +444,7 @@ if counties:
     if sw_out and sw_cure:
         bar_note_html = f'<strong style="color:var(--text);">Statewide: {sw_out:,} ballots outstanding · {sw_cure:,} left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has {[c for c in c_data if c["name"]=="Los Angeles"][0].get("unprocessed",0):,} remaining.'
     else:
-        bar_note_html = f'<strong style="color:var(--text);">Unprocessed ballot data pending.</strong> Next BAR report expected soon — statewide outstanding count will update when available.'
+        bar_note_html = f'<strong style="color:var(--text);">Unprocessed ballot data pending.</strong> Next unprocessed ballots report expected soon — statewide outstanding count will update when available.'
 
 else:
     # No counties file — preserve existing counties section as-is
@@ -485,7 +485,46 @@ else:
     delta_str = ""
 
 c1_gap = abs(canvass_rows[0]['hilton'] - canvass_rows[0]['becerra'])
-alert_html = f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str} — a complete reversal from Hilton\'s peak lead of +{c1_gap:,} at C1 (Jun 3). Becerra advances to the November general election. <strong>{sw_out:,} ballots remain outstanding statewide</strong> per the BAR unprocessed ballots report ({c_as_of}) — the vast majority in D-leaning counties. {alert_trail_str}''' if sw_out else f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str}. Becerra advances to the November general election.'''
+
+if sw_out:
+    pending_count_all  = counties.get('counties_pending_count', 0) if counties else 0
+    pending_names      = counties.get('counties_pending_display_names', []) if counties else []
+    counties_total     = counties.get('counties_total', len(c_data)) if counties else 0
+    pending_count      = len(pending_names)
+    complete_count     = counties_total - pending_count_all
+    cert_note          = counties.get('pending_cert_note', '') if counties else ''
+
+    if pending_count == 1:
+        pending_str = f"{pending_names[0]} County"
+    elif pending_count > 1:
+        pending_str = ", ".join(pending_names[:-1]) + f", {pending_names[-1]}"
+    else:
+        pending_str = ""
+
+    outstanding_str = f"Only {sw_out:,} ballots remain statewide"
+    if cert_note:
+        outstanding_str += f", {cert_note}"
+    outstanding_str += "."
+
+    if counties_total and pending_count_all:
+        progress_str = (f"{complete_count} of {counties_total} counties have posted final results "
+                         f"per the unprocessed ballots report ({c_as_of})")
+        if pending_str:
+            progress_str += (f"; the remaining {pending_count} ({pending_str}) have completed "
+                              f"processing but are awaiting their final report confirmation.")
+        else:
+            progress_str += "."
+    elif counties_total:
+        progress_str = f"All {counties_total} counties have posted final results per the unprocessed ballots report ({c_as_of})."
+    else:
+        progress_str = ""
+
+    alert_html = (f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str} — '''
+                  f'''a complete reversal from Hilton\'s peak lead of +{c1_gap:,} at C1 (Jun 3). '''
+                  f'''Becerra advances to the November general election. <strong>{outstanding_str}</strong> '''
+                  f'''{progress_str} {alert_trail_str}''')
+else:
+    alert_html = f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str}. Becerra advances to the November general election.'''
 
 # ── Header subtitle ───────────────────────────────────────────────────────────
 hdr_sub = f"Latest: {CID} · {CDT.replace(' · ', ', ')} · {SNAP_COUNT} total snapshots · Unofficial results"

@@ -527,5 +527,14 @@
       "to_cure": 182,
       "bar_processed": 17406
     }
+  ],
+  "counties_total": 58,
+  "pending_cert_note": "all in Mono County, which plans to certify July 2",
+  "counties_pending_count": 5,
+  "counties_pending_display_names": [
+    "Humboldt",
+    "Modoc",
+    "San Diego",
+    "Sierra"
   ]
 }
