@@ -519,12 +519,12 @@ if sw_out:
     else:
         progress_str = ""
 
-    alert_html = (f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str} — '''
+    alert_html = (f'''<strong>Canvass update {CID} · {CDT}.</strong> {alert_gap_str} — '''
                   f'''a complete reversal from Hilton\'s peak lead of +{c1_gap:,} at C1 (Jun 3). '''
                   f'''Becerra advances to the November general election. <strong>{outstanding_str}</strong> '''
                   f'''{progress_str} {alert_trail_str}''')
 else:
-    alert_html = f'''<strong>Canvass update {CID} · {CDT} — {alert_leader_str}.</strong> {alert_gap_str}. Becerra advances to the November general election.'''
+    alert_html = f'''<strong>Canvass update {CID} · {CDT}.</strong> {alert_gap_str}. Becerra advances to the November general election.'''
 
 # ── Header subtitle ───────────────────────────────────────────────────────────
 hdr_sub = f"Latest: {CID} · {CDT.replace(' · ', ', ')} · {SNAP_COUNT} total snapshots · Unofficial results"
