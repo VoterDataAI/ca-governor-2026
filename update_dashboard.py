@@ -789,9 +789,9 @@ html = re.sub(pattern, rf'\g<1>\n{tbody_html}        \3', html, count=1, flags=r
 # Replace the JS variable declarations
 def replace_js_var(html, varname, new_val_str):
     pattern = rf'(const {re.escape(varname)}\s*=\s*)(\[.*?\])(;)'
-    result = re.sub(pattern, rf'\g<1>{new_val_str}\3', html, count=1, flags=re.DOTALL)
-    if result == html:
-        print(f"  WARNING: JS var '{varname}' not updated")
+    result, n_sub = re.subn(pattern, rf'\g<1>{new_val_str}\3', html, count=1, flags=re.DOTALL)
+    if n_sub == 0:
+        print(f"  WARNING: JS var '{varname}' not found in HTML")
     return result
 
 html = replace_js_var(html, 'ALL_LABS',    js_str_arr(ALL_LABS))
@@ -805,9 +805,9 @@ html = replace_js_var(html, 'BATCH_LABS',  js_str_arr(ALL_BATCH_LABS))
 # Batch share chart datasets
 def replace_chart_data(html, label_str, new_data_str):
     pattern = rf"(label:'{re.escape(label_str)}'[^}}]*data:)(\[.*?\])"
-    result = re.sub(pattern, rf'\g<1>{new_data_str}', html, count=1, flags=re.DOTALL)
-    if result == html:
-        print(f"  WARNING: chart dataset '{label_str}' not updated")
+    result, n_sub = re.subn(pattern, rf'\g<1>{new_data_str}', html, count=1, flags=re.DOTALL)
+    if n_sub == 0:
+        print(f"  WARNING: chart dataset '{label_str}' not found in HTML")
     return result
 
 html = replace_chart_data(html, 'Hilton (R)',   js_arr(ALL_BATCH_H))
@@ -817,29 +817,36 @@ html = replace_chart_data(html, 'R 2:1 baseline', js_arr(BATCH_BASELINE))
 
 # ── Counties tab ──────────────────────────────────────────────────────────────
 if counties:
-    # Top 10 bar rows
-    pattern = r'(class="sl" style="margin-bottom:12px;">Top 10 counties.*?</div>\n)(.*?)(        <div style="font-family:var\(--mono\).*?Source:.*?</div>)'
-    html = re.sub(pattern, rf'\g<1>{top10_html}        \g<3>', html, count=1, flags=re.DOTALL)
-
-    # Top 10 source line — full replacement using marker search
-    src_marker = 'class="counties-source"'
-    src_idx = html.find(src_marker)
-    if src_idx != -1:
-        src_start = html.index('>', src_idx) + 1
-        src_end   = html.index('</div>', src_start)
-        html = html[:src_start] + top10_src + html[src_end:]
-    else:
-        print("  WARNING: counties source line (class='counties-source') not found in HTML")
+    # Top 10 bar rows + source line — replaced atomically in one regex so this
+    # no longer depends on a class="counties-source" attribute (which turned
+    # out to be missing from the live HTML, silently breaking the old two-step approach)
+    pattern = (r'(class="sl" style="margin-bottom:12px;">Top 10 counties.*?</div>\n)'
+               r'(.*?)'
+               r'(        <div style="font-family:var\(--mono\)[^>]*>)'
+               r'(Source:.*?)'
+               r'(</div>)')
+    new_html, n_sub = re.subn(pattern, rf'\g<1>{top10_html}\g<3>{top10_src}\g<5>', html, count=1, flags=re.DOTALL)
+    if n_sub == 0:
+        print("  WARNING: Top 10 counties block / source line not found in HTML")
+    html = new_html
 
     # BAR table rows
     pattern = r'(<tbody>)(.*?)(</tbody>)'
-    # Ensure BAR table is in its own card with correct heading
-    if 'Unprocessed ballots by county — BAR report' not in html:
+    # Ensure BAR table is in its own card with correct heading.
+    # Two cases: card not yet split out (older files — insert structure), or
+    # already split with the old "BAR report" wording (just rename in place).
+    if ('Unprocessed ballots by county — unprocessed ballots report' not in html
+            and 'Unprocessed ballots by county — BAR report' not in html):
         html = html.replace(
             '</div>\n        <div class="bar-table-wrap">',
-            '</div>\n      </div>\n      <div class="card">\n        <div class="sl" style="margin-bottom:12px;">Unprocessed ballots by county — BAR report</div>\n        <div class="bar-table-wrap">',
+            '</div>\n      </div>\n      <div class="card">\n        <div class="sl" style="margin-bottom:12px;">Unprocessed ballots by county — unprocessed ballots report</div>\n        <div class="bar-table-wrap">',
             1)
-        print("  Fixed: BAR table split into separate card")
+        print("  Fixed: table split into separate card")
+    else:
+        html = html.replace(
+            'Unprocessed ballots by county — BAR report',
+            'Unprocessed ballots by county — unprocessed ballots report',
+            1)
 
     # Replace the BAR table tbody — find it by its proximity to bar-table-wrap
     bar_wrap_idx = html.find('class="bar-table-wrap"')
