@@ -441,8 +441,12 @@ if counties:
         to_cure = c.get('to_cure', 0)
         bar_rows_html += f'''            <tr{is_cur_class}><td><strong>{c["name"]}</strong></td><td>{proc:,}</td><td style="color:var(--gold);">{c.get("unprocessed",0):,}</td><td style="color:var(--text-dim);">{to_cure:,}</td><td>{lean_html}</td></tr>\n'''
 
-    if sw_out and sw_cure:
-        bar_note_html = f'<strong style="color:var(--text);">Statewide: {sw_out:,} ballots outstanding · {sw_cure:,} left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has {[c for c in c_data if c["name"]=="Los Angeles"][0].get("unprocessed",0):,} remaining.'
+    if sw_out is not None and sw_cure is not None:
+        if sw_out:
+            la_remaining = [c for c in c_data if c["name"]=="Los Angeles"][0].get("unprocessed", 0)
+            bar_note_html = f'<strong style="color:var(--text);">Statewide: {sw_out:,} ballots outstanding · {sw_cure:,} left to cure.</strong> The outstanding universe is overwhelmingly D-leaning — LA alone has {la_remaining:,} remaining.'
+        else:
+            bar_note_html = f'<strong style="color:var(--text);">Statewide: 0 ballots outstanding · {sw_cure:,} left to cure.</strong> Canvass processing is complete; remaining activity is routine ballot curing ahead of certification.'
     else:
         bar_note_html = f'<strong style="color:var(--text);">Unprocessed ballot data pending.</strong> Next unprocessed ballots report expected soon — statewide outstanding count will update when available.'
 
@@ -524,7 +528,10 @@ if sw_out:
                   f'''Becerra advances to the November general election. <strong>{outstanding_str}</strong> '''
                   f'''{progress_str} {alert_trail_str}''')
 else:
+    complete_note = counties.get('canvass_complete_note', '') if counties else ''
     alert_html = f'''<strong>Canvass update {CID} · {CDT}.</strong> {alert_gap_str}. Becerra advances to the November general election.'''
+    if complete_note:
+        alert_html += f' {complete_note}'
 
 # ── Header subtitle ───────────────────────────────────────────────────────────
 hdr_sub = f"Latest: {CID} · {CDT.replace(' · ', ', ')} · {SNAP_COUNT} total snapshots · Unofficial results"
@@ -655,9 +662,10 @@ html = set_id_content(html, 'hdr-total-ballots', f'{TOTAL_GOV:,}')
 html = set_id_content(html, 'hdr-total-ballots-label', 'Governor race votes counted')
 if sw_ballots:
     html = set_id_content(html, 'hdr-turnout', f'{sw_turnout}%')
-if sw_out:
+if sw_out is not None:
     html = set_id_content(html, 'hdr-gov-votes', f'{sw_out:,}')
-    html = set_id_content(html, 'hdr-gov-votes-label', 'Ballots still outstanding')
+    html = set_id_content(html, 'hdr-gov-votes-label',
+                           'Ballots still outstanding' if sw_out else 'Canvass complete — 0 outstanding')
 html = set_id_content(html, 'hdr-lead',       f'+{ABS_GAP:,}')
 html = set_id_content(html, 'hdr-lead-label', f'{LEADER} lead · current')
 html = set_id_style_attr(html, 'hdr-lead', 'color', LEADER_COLOR)
@@ -740,11 +748,12 @@ html = update_card(html, 'card-becerra-pct',
 
 # Pct counted = ballots counted / (ballots counted + outstanding)
 # Numerator from SOS snapshots (current); denominator stable even with stale county data
-if sw_ballots and sw_out:
-    pct_counted = round(sw_ballots / (sw_ballots + sw_out) * 100, 1)
+if sw_ballots is not None and sw_out is not None:
+    denom = sw_ballots + sw_out
+    pct_counted = round(sw_ballots / denom * 100, 1) if denom else 100.0
     pct_counted_str = f'{pct_counted}% of returned ballots counted'
-    unproc_cure_str = f'{sw_cure:,} left to cure'
-    unproc_color = 'var(--gold)'
+    unproc_cure_str = f'{sw_cure:,} left to cure' if sw_cure is not None else 'cure data unavailable'
+    unproc_color = 'var(--gold)' if sw_out else 'var(--green)'
 else:
     pct_counted_str = f'{SNAP_COUNT} snapshots logged'
     unproc_cure_str = 'county data unavailable'
@@ -752,7 +761,7 @@ else:
 
 html = update_card(html, 'card-snapshots',
     label='Unprocessed Ballots',
-    val=f'{sw_out:,}' if sw_out else 'N/A',
+    val=f'{sw_out:,}' if sw_out is not None else 'N/A',
     val_color=unproc_color,
     sub=unproc_cure_str,
     delta=pct_counted_str,
@@ -873,9 +882,10 @@ if counties:
     html = re.sub(pattern, rf'\g<1>{bar_note_html}\3', html, count=1, flags=re.DOTALL)
 
     # BAR report header stats
-    if sw_out:
+    if sw_out is not None:
         pattern = r'(Statewide: <strong[^>]*>)[^<]*(</strong>)'
-        html = re.sub(pattern, rf'\g<1>{sw_out:,} ballots still outstanding\2', html, count=1)
+        outstanding_text = f'{sw_out:,} ballots still outstanding' if sw_out else '0 ballots outstanding — canvass complete'
+        html = re.sub(pattern, rf'\g<1>{outstanding_text}\2', html, count=1)
 
 # ── Party aggregate label + legend + footer ──────────────────────────────────
 # "Party aggregate vote — CX latest" label
@@ -928,10 +938,10 @@ print(f"  Steyer:      {S:,} ({S_P}%)")
 print(f"  Total gov:   {TOTAL_GOV:,}")
 if sw_ballots:
     print(f"  Total cast:  {sw_ballots:,} ({sw_turnout}% turnout)")
-    if sw_out:
+    if sw_out is not None:
         print(f"  Outstanding: {sw_out:,} · {sw_cure:,} to cure")
     else:
-        print(f"  Outstanding: pending BAR update")
+        print(f"  Outstanding: county data unavailable")
 print(f"  Snapshots:   {SNAP_COUNT} ({en_count} EN + {cv_count} canvass)")
 print(f"  Charts:      {len(ALL_LABS)} labels · {len(ALL_BATCH_LABS)} batch points")
 print(f"{'='*60}")
