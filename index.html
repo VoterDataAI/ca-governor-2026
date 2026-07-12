@@ -153,12 +153,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
     <div class="state-flag">CA</div>
     <div>
       <div class="header-title">CA Governor 2026 — Primary canvass tracker</div>
-      <div class="header-sub" id="hdr-sub">Latest: C32 · Jul 3, 3:37p · 39 total snapshots · Unofficial results</div>
+      <div class="header-sub" id="hdr-sub">CERTIFIED · Statement of the Vote · July 10, 2026 · Final results</div>
     </div>
   </div>
   <div class="header-right">
     <div class="header-stat"><div class="header-stat-val" id="hdr-total-ballots">9,237,499</div><div class="header-stat-label" id="hdr-total-ballots-label">Governor race votes counted</div></div>
-    <div class="header-stat"><div class="header-stat-val" id="hdr-gov-votes">0</div><div class="header-stat-label" id="hdr-gov-votes-label">Canvass complete — 0 outstanding</div></div>
+    <div class="header-stat"><div class="header-stat-val" id="hdr-gov-votes">0</div><div class="header-stat-label" id="hdr-gov-votes-label">Certified — Final results</div></div>
     <div class="header-stat"><div class="header-stat-val" id="hdr-turnout">40.8%</div><div class="header-stat-label">Statewide turnout</div></div>
     <div class="header-stat"><div class="header-stat-val" id="hdr-lead" style="color:#2563eb;">+314,542</div><div class="header-stat-label" id="hdr-lead-label">Becerra lead · current</div></div>
     <div class="canvass-badge"><div class="pulse"></div><div><div>UNOFFICIAL · CANVASS OPEN</div><div id="hdr-last-fetched" style="font-size:9px;color:rgba(37,99,235,0.7);margin-top:2px;letter-spacing:0.5px;">Last updated: C32 · Jul 3 · 3:37p</div></div></div>
@@ -167,7 +167,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
 
 <div class="container">
 
-  <div class="alert" id="alert-box"><strong>Canvass update C32 · Jul 3 · 3:37p.</strong> Becerra now leads Hilton by <strong>+314,542</strong>. Becerra advances to the November general election. All 58 counties have now posted final results — Humboldt, Modoc, San Diego, and Sierra have completed processing, and Mono County, which held the last outstanding ballots, has finished curing. 7,054 ballots remain within the standard statewide curing window ahead of the July 10 certification deadline.</div>
+  <div class="alert" id="alert-box"><strong>CERTIFIED — Statement of the Vote.</strong> The California Secretary of State has certified the June 2, 2026 primary election results. Xavier Becerra (D) finishes first with <strong>2,591,857 votes (28.0%)</strong> and Steve Hilton (R) finishes second with <strong>2,277,318 votes (24.6%)</strong>. Becerra leads by <strong>+314,539</strong>. Both advance to the November 2026 general election.</div>
 
   <div class="sl">Top two advance to November general · certified July 10, 2026</div>
   <div class="grid-3">
@@ -261,7 +261,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
       </div>
     </div>
 
-    <div class="sl">Complete snapshot log — all 14 drops</div>
+    <div class="sl">Canvass updates — Election night through certification</div>
     <div class="card">
       <div class="snap-table-wrap"><table class="snap-table">
         <thead>
@@ -313,7 +313,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
         <span>S1–S7 = election night drops · C1–C32 = canvass updates</span>
         <span style="color:rgba(224,48,48,0.4);">■ Pink row = lead peak (C1)</span>
         <span style="color:rgba(37,99,235,0.6);">■ Blue row = latest (C32)</span>
-        <span>S5 R bounce caused by Kern (152k ballots, 33% turnout) flushing through late</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--text-dim);margin-top:6px;">
+        Note: Gaps in canvass updates (e.g. C25→C26) are due to technical difficulties receiving data from the SOS API during those periods. S5 R bounce caused by Kern (152k ballots, 33% turnout) flushing through late.
       </div>
     </div>
   </div>
@@ -399,7 +401,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
           <tbody>
           </tbody>
         </table></div>
-        <div style="margin-top:12px;padding:10px 14px;background:var(--surface2);border-radius:4px;border-left:2px solid var(--blue);font-family:var(--mono);font-size:11px;color:var(--text-mid);line-height:1.6;"><strong style="color:var(--text);">Statewide: 0 ballots outstanding · 7,054 left to cure.</strong> Canvass processing is complete; remaining activity is routine ballot curing ahead of certification.</div>
+        <div style="margin-top:12px;padding:10px 14px;background:var(--surface2);border-radius:4px;border-left:2px solid var(--blue);font-family:var(--mono);font-size:11px;color:var(--text-mid);line-height:1.6;"><strong style="color:var(--text);">CERTIFIED. Statement of the Vote issued July 10, 2026. Becerra: 2,591,857 (28.0%) · Hilton: 2,277,318 (24.6%) · Steyer: 2,110,707 (22.8%).</strong> Canvass processing is complete; remaining activity is routine ballot curing ahead of certification.</div>
       </div>
     </div>
   </div>
@@ -407,13 +409,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13
   <!-- VERDICT TAB -->
   <div id="tc-verdict" class="tc">
     <div class="card" style="margin-bottom:16px;">
-      <div class="sl" style="margin-bottom:14px;">Canvass analysis — Becerra overtakes Hilton, earns top spot</div>
+      <div class="sl" style="margin-bottom:14px;">CERTIFIED — Becerra wins top spot, advances to November</div>
       <div style="font-size:13px;color:var(--text-mid);line-height:1.8;columns:2;column-gap:32px;" class="verdict-body">
         <p style="margin-bottom:12px;">After a week, the race is clear. Hilton led on election night by +120,084, but the lead evaporated quickly as late Democratic VBM ballots arrived. By June 5, Becerra had taken the lead — and has never looked back. The canvass has added nearly 2.9 million governor race votes since election night, running at roughly 61% Democratic.</p>
         <p style="margin-bottom:12px;">Every canvass batch has been majority Democratic. Hilton's individual batch share has ranged from 17.9% to 25.1% — consistently below his 27.8% election night share. The C6 batch (Jun 5, 4:24p) was decisive: 396k votes at 60.8% D wiped out the remaining Hilton advantage in a single drop, handing Becerra the lead for good.</p>
         <p style="margin-bottom:12px;">Becerra's vote share has risen from 25.4% election night to 27.7% at the latest count. Hilton has declined from 27.8% to 25.1%. The gap has continued to widen as late Democratic VBM ballots arrived from LA, Sacramento, and the Bay Area.</p>
         <p style="margin-bottom:12px;">Tom Steyer conceded after meaningfully closing the gap on Hilton through the late canvass — at his peak he trailed Hilton by just over 215,000 votes. Ultimately, Steyer could not build sufficient Democratic voter pools to offset Hilton's durable Republican base. Hilton has been declared the second-place finisher and advances to the November general election alongside Becerra.</p>
-        <p style="margin-bottom:0;">Outlook: with roughly 538,000 ballots still outstanding statewide, Becerra's certified lead is expected to hold and likely grow through the July 10 certification deadline. The November matchup is set: Becerra vs. Hilton.</p>
+        <p style="margin-bottom:0;">CERTIFIED: The Secretary of State certified the results on July 10, 2026. Final margin: Becerra +314,539 over Hilton. Becerra earned 2,591,857 votes (28.0%), Hilton 2,277,318 (24.6%), and Steyer 2,110,707 (22.8%). Total governor race votes: 9,253,058. The November 2026 general election is set: Xavier Becerra (D) vs. Steve Hilton (R).</p>
       </div>
     </div>
     <div class="grid-2">

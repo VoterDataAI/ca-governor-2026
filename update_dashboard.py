@@ -4,6 +4,10 @@ update_dashboard.py — CA Governor 2026 canvass tracker dashboard updater
 Reads: sos_snapshots.json + counties_data.json
 Writes: index.html (published directly to GitHub Pages)
 
+STATUS: CERTIFIED — Election certified July 10, 2026.
+This script is preserved for reference but should not be run again.
+The dashboard (index.html) contains final certified results.
+
 Usage:
     python3 update_dashboard.py
     python3 update_dashboard.py --html index.html
@@ -13,6 +17,18 @@ Usage:
 import json
 import re
 import argparse
+import sys
+
+# ── Certification guard ───────────────────────────────────────────────────────
+CERTIFIED = True
+if CERTIFIED:
+    print("\n  ⚠  Election CERTIFIED — July 10, 2026.")
+    print("  Dashboard contains final Statement of the Vote results.")
+    print("  Re-running this script will overwrite certified data.\n")
+    confirm = input("  Type 'override' to proceed, or press Enter to abort: ")
+    if confirm.strip().lower() != 'override':
+        print("  Aborted. Dashboard unchanged.")
+        sys.exit(0)
 from datetime import datetime
 from pathlib import Path
 
